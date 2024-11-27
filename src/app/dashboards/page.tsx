@@ -1,15 +1,20 @@
-import { Metadata } from "next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreditCard, ShoppingCart, UtensilsCrossed, Users } from "lucide-react";
-import { MemberDetails } from "./member-details";
-import { MealRateAnalysis } from "./meal-rate-analysis";
-import { MarketCostManagement } from "./market-cost-management";
-import { MealManagement } from "./meal-management";
-import { currentUser } from "./lib/data";
-import { UserMealHistory } from "./user-meal-history";
-import { UserExpenseHistory } from "./user-expense-history";
-import { ExpenseTrend } from "./expense-trend";
+import { CalendarDays, DollarSign, Users, UtensilsCrossed } from "lucide-react";
+import { Metadata } from "next";
+import { MarketCostManagement } from "@/components/market-cost-management";
+import { MealCounts } from "@/components/meal-counts";
+import { MealManagement } from "@/components/meal-management";
+import { MealRateAnalysis } from "@/components/meal-rate-analysis";
+import { MemberBalances } from "@/components/member-balances";
+import { MemberDetails } from "@/components/member-details";
+import { RecentMarketExpenses } from "@/components/recent-market-expenses";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -22,32 +27,28 @@ export default function DashboardPage() {
       <div className="flex-col md:flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Welcome, {currentUser.name}
-            </h2>
+            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
               <TabsTrigger value="management">Management</TabsTrigger>
-              <TabsTrigger value="members">All Members</TabsTrigger>
+              <TabsTrigger value="members">Members</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Current Balance
+                      Total Market Costs
                     </CardTitle>
-                    <CreditCard className="h-4 w-4 text-muted-foreground" />
+                    <DollarSign className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">
-                      ${currentUser.balance.toFixed(2)}
-                    </div>
+                    <div className="text-2xl font-bold">$1,234.56</div>
                     <p className="text-xs text-muted-foreground">
-                      Your current account balance
+                      +20.1% from last month
                     </p>
                   </CardContent>
                 </Card>
@@ -59,56 +60,65 @@ export default function DashboardPage() {
                     <UtensilsCrossed className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">
-                      {currentUser.totalMealsConsumed}
-                    </div>
+                    <div className="text-2xl font-bold">345</div>
                     <p className="text-xs text-muted-foreground">
-                      Your total meals this month
+                      +10.5% from last month
                     </p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Total Market Expenses
+                      Current Meal Rate
                     </CardTitle>
-                    <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+                    <CalendarDays className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">
-                      ${currentUser.totalMarketExpenses.toFixed(2)}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      Your total market expenses
-                    </p>
+                    <div className="text-2xl font-bold">$3.58</div>
+                    <p className="text-xs text-muted-foreground">Per meal</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Role</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Active Members
+                    </CardTitle>
                     <Users className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{currentUser.role}</div>
+                    <div className="text-2xl font-bold">5</div>
                     <p className="text-xs text-muted-foreground">
-                      Your role in the system
+                      +1 guest this month
                     </p>
                   </CardContent>
                 </Card>
               </div>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <Card className="col-span-4">
-                  <UserMealHistory meals={currentUser.recentMeals} />
+                  <CardHeader>
+                    <CardTitle>Recent Market Expenses</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <RecentMarketExpenses />
+                  </CardContent>
                 </Card>
                 <Card className="col-span-3">
-                  <UserExpenseHistory expenses={currentUser.recentExpenses} />
+                  <CardHeader>
+                    <CardTitle>Member Balances</CardTitle>
+                    <CardDescription>
+                      Current balance for each member
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <MemberBalances />
+                  </CardContent>
                 </Card>
               </div>
             </TabsContent>
             <TabsContent value="analytics" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
+                <MealCounts />
                 <MealRateAnalysis />
-                <ExpenseTrend />
               </div>
             </TabsContent>
             <TabsContent value="management" className="space-y-4">
