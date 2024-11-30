@@ -1,5 +1,8 @@
 "use client";
 
+import { TrendingUp } from "lucide-react";
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
+
 import {
   Card,
   CardContent,
@@ -9,74 +12,87 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { TrendingUp } from "lucide-react";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-
-const mealRateData = [
-  { month: "Jan", rate: 3.25 },
-  { month: "Feb", rate: 3.4 },
-  { month: "Mar", rate: 3.35 },
-  { month: "Apr", rate: 3.5 },
-  { month: "May", rate: 3.45 },
-  { month: "Jun", rate: 3.58 },
-  { month: "Jul", rate: 3.62 },
-  { month: "Aug", rate: 3.7 },
-  { month: "Sep", rate: 3.65 },
-  { month: "Oct", rate: 3.55 },
-  { month: "Nov", rate: 3.6 },
-  { month: "Dec", rate: 3.58 },
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
+  { month: "June", desktop: 214, mobile: 140 },
 ];
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig;
 
 export function MealRateAnalysis() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Meal Rate Analysis</CardTitle>
-        <CardDescription>
-          Historical meal rate changes over the past year
-        </CardDescription>
+        <CardTitle>Line Chart - Label</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={{
-            rate: {
-              label: "Meal Rate",
-              color: "hsl(var(--chart-1))",
-            },
-          }}
-          className="h-[300px]"
-        >
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={mealRateData}>
-              <XAxis
-                dataKey="month"
-                stroke="#888888"
+        <ChartContainer config={chartConfig}>
+          <LineChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              top: 20,
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              dataKey="desktop"
+              type="natural"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
                 fontSize={12}
-                tickLine={false}
-                axisLine={false}
               />
-              <YAxis
-                stroke="#888888"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `$${value}`}
-                domain={["auto", "auto"]}
-              />
-              <Line
-                type="monotone"
-                dataKey="rate"
-                stroke="var(--color-rate)"
-                strokeWidth={2}
-                dot={false}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-            </LineChart>
-          </ResponsiveContainer>
+            </Line>
+          </LineChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">

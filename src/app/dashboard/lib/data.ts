@@ -3,7 +3,7 @@ export const currentUser = {
   name: "John Doe",
   email: "john.doe@example.com",
   role: "Member",
-  balance: -50.25,
+  balance: 50.25,
   totalMealsConsumed: 45,
   totalMarketExpenses: 150.75,
   recentMeals: [

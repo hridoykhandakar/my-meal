@@ -10,6 +10,7 @@ import { currentUser } from "./lib/data";
 import { UserMealHistory } from "./user-meal-history";
 import { UserExpenseHistory } from "./user-expense-history";
 import { ExpenseTrend } from "./expense-trend";
+import { Balance } from "./components/balance";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -43,9 +44,7 @@ export default function DashboardPage() {
                     <CreditCard className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">
-                      ${currentUser.balance.toFixed(2)}
-                    </div>
+                    <Balance balance={currentUser.balance} />
                     <p className="text-xs text-muted-foreground">
                       Your current account balance
                     </p>

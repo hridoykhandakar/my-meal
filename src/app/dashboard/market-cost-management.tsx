@@ -6,6 +6,13 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Card,
   CardContent,
   CardDescription,
@@ -127,10 +134,24 @@ export function MarketCostManagement() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Purchasers Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
-                  </FormControl>
-                  <FormMessage />
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    {...field}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a User" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Jubaiyer">Jubaiyer</SelectItem>
+                      <SelectItem value="Hridoy">Hridoy</SelectItem>
+                      <SelectItem value="Alamin">Alamin</SelectItem>
+                      <SelectItem value="Rafiul">Rafiul</SelectItem>
+                    </SelectContent>
+                    <FormMessage />
+                  </Select>
                 </FormItem>
               )}
             />

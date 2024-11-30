@@ -24,6 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Balance } from "./components/balance";
 
 const members = [
   { id: "1", name: "John Doe" },
@@ -176,13 +177,7 @@ export function MemberDetails() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div
-                className={`text-2xl font-bold ${
-                  summary.balance < 0 ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                ${summary.balance.toFixed(2)}
-              </div>
+              <Balance balance={summary.balance} />
             </CardContent>
           </Card>
           <Card>
