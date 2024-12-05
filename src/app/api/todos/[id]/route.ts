@@ -15,10 +15,12 @@ export async function PUT(
   });
   if (!todo)
     return NextResponse.json({ error: "todo not found" }, { status: 404 });
+  const { title, isCompleted } = validation.data;
   const updatedTodo = await prisma.todo.update({
     where: { id: todo.id },
     data: {
-      title: body.title,
+      ...(title !== undefined && { title }),
+      ...(isCompleted !== undefined && { isCompleted }),
     },
   });
   return NextResponse.json(updatedTodo);

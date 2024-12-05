@@ -28,11 +28,12 @@ export function UserExpenseHistory({ expenses }: UserExpenseHistoryProps) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Recent Expenses</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          Recent Market Expenses
+        </CardTitle>
         <ShoppingCart className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">${totalExpenses.toFixed(2)}</div>
         <p className="text-xs text-muted-foreground mb-4">
           Total from last 5 entries
         </p>
@@ -42,6 +43,7 @@ export function UserExpenseHistory({ expenses }: UserExpenseHistoryProps) {
               <TableHead>Date</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Items</TableHead>
+              <TableHead>User</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -50,6 +52,7 @@ export function UserExpenseHistory({ expenses }: UserExpenseHistoryProps) {
                 <TableCell>{expense.date}</TableCell>
                 <TableCell>${expense.amount.toFixed(2)}</TableCell>
                 <TableCell>{expense.items}</TableCell>
+                <TableCell>Hridoy</TableCell>
               </TableRow>
             ))}
           </TableBody>
