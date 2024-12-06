@@ -7,9 +7,10 @@ import { MealRateAnalysis } from "./meal-rate-analysis";
 import { MarketCostManagement } from "./market-cost-management";
 import { MealManagement } from "./meal-management";
 import { currentUser } from "./lib/data";
-import { UserExpenseHistory } from "./user-expense-history";
+import { ExpenseHistory } from "./expense-history";
 import { ExpenseTrend } from "./expense-trend";
 import { Balance } from "./components/balance";
+import { UserMealHistory } from "./user-meal-history";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -88,9 +89,12 @@ export default async function DashboardPage() {
                   </CardContent>
                 </Card>
               </div>
-              <div className="grid gap-4 ">
-                <Card>
-                  <UserExpenseHistory expenses={currentUser.recentExpenses} />
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
+                <Card className="col-span-4">
+                  <ExpenseHistory />
+                </Card>
+                <Card className="col-span-4">
+                  <UserMealHistory meals={currentUser.recentMeals} />
                 </Card>
               </div>
             </TabsContent>
