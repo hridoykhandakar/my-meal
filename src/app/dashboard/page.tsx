@@ -9,8 +9,8 @@ import { MealManagement } from "./meal-management";
 import { currentUser } from "./lib/data";
 import { ExpenseHistory } from "./expense-history";
 import { ExpenseTrend } from "./expense-trend";
-import { Balance } from "./components/balance";
-import { UserMealHistory } from "./user-meal-history";
+import { Balance } from "./_components/balance";
+import { UserSummary } from "./user-summary";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -52,7 +52,7 @@ export default async function DashboardPage() {
                     <CreditCard className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <Balance balance={data.mealRate} />
+                    <Balance className="text-2xl" balance={data.mealRate} />
                     <p className="text-xs text-muted-foreground">
                       Meal Rate of this Month
                     </p>
@@ -91,10 +91,10 @@ export default async function DashboardPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
                 <Card className="col-span-4">
-                  <ExpenseHistory />
+                  <UserSummary />
                 </Card>
                 <Card className="col-span-4">
-                  <UserMealHistory meals={currentUser.recentMeals} />
+                  <ExpenseHistory />
                 </Card>
               </div>
             </TabsContent>

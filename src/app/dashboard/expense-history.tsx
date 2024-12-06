@@ -49,7 +49,7 @@ export async function ExpenseHistory() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((expense: Market) => (
+            {data?.slice(-5).map((expense: Market) => (
               <TableRow key={expense.id}>
                 <TableCell>
                   {new Date(expense.date).toLocaleDateString()}

@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { Balance } from "./components/balance";
+import { Balance } from "./_components/balance";
 
 const members = [
   { id: "1", name: "John Doe" },
