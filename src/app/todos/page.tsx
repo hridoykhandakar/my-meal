@@ -1,5 +1,5 @@
 export default async function Todos() {
-  const res = await fetch("http://localhost:3000/api/todos");
+  const res = await fetch("/api/todos");
   const data = await res.json();
   type todo = {
     id: string;

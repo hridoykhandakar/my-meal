@@ -4,13 +4,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CreditCard, ShoppingCart, UtensilsCrossed } from "lucide-react";
 import { MemberDetails } from "./member-details";
 import { MealRateAnalysis } from "./meal-rate-analysis";
-import { MarketCostManagement } from "./market-cost-management";
-import { MealManagement } from "./meal-management";
+import { MarketCostManagement } from "./_components/management/market-cost-management";
+import { MealManagement } from "./_components/management/meal-management";
 import { currentUser } from "./lib/data";
 import { ExpenseHistory } from "./expense-history";
 import { ExpenseTrend } from "./expense-trend";
 import { Balance } from "./_components/balance";
 import { UserSummary } from "./user-summary";
+import ResponsiveNav from "./_components/ResponsiveNav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -28,6 +29,7 @@ export default async function DashboardPage() {
 
   return (
     <>
+      <ResponsiveNav />
       <div className="flex-col md:flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
